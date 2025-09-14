@@ -1,10 +1,11 @@
-[gd_scene load_steps=44 format=3 uid="uid://cl7nnlp3lbxvy"]
+[gd_scene load_steps=45 format=3 uid="uid://cl7nnlp3lbxvy"]
 
 [ext_resource type="Texture2D" uid="uid://bu7kqbcx348fy" path="res://Entities/Player/Sprites/DieSpriteshoot.png" id="1_1des2"]
 [ext_resource type="Script" uid="uid://cpw2l6dje7pak" path="res://Entities/Player/Player.gd" id="1_an6q6"]
 [ext_resource type="Texture2D" uid="uid://ctl501uucyy1b" path="res://Entities/Player/Sprites/IdleSpritesheet.png" id="1_e5kic"]
 [ext_resource type="Texture2D" uid="uid://njx8lwy2rwaa" path="res://Entities/Player/Sprites/HurtSpritesheet.png" id="1_vweq0"]
 [ext_resource type="Texture2D" uid="uid://dwixxv5mkgegi" path="res://Entities/Player/Sprites/WalkSpritesheet.png" id="2_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://df7wbk6yhv8ra" path="res://Entities/Components/SpeedComponent.tscn" id="6_t38ms"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l80rc"]
 atlas = ExtResource("1_1des2")
@@ -278,21 +279,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 10.0
+"speed": 20.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qydi"]
 size = Vector2(10, 15)
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_an6q6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.66, -6.2)
 sprite_frames = SubResource("SpriteFrames_u36tg")
-animation = &"idle"
+animation = &"walk"
 offset = Vector2(0.34, -5.229)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_3qydi")
+
+[node name="SpeedComponent" parent="." instance=ExtResource("6_t38ms")]
+min_speed = 80.0
+max_speed = 200.0
